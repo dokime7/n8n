@@ -52,8 +52,25 @@ export const companyFields = [
 	/*                                company:create                              */
 	/* -------------------------------------------------------------------------- */
 	{
+		displayName: 'JSON Parameters',
+		name: 'jsonParameters',
+		type: 'boolean',
+		default: false,
+		description: '',
+		displayOptions: {
+			show: {
+				resource: [
+					'company',
+				],
+				operation: [
+					'create',
+				],
+			},
+		},
+	},
+	{
 		displayName: 'Company Name',
-		name: 'name',
+		name: 'companyname',
 		type: 'string',
 		displayOptions: {
 			show: {
@@ -63,15 +80,18 @@ export const companyFields = [
 				operation: [
 					'create',
 				],
+				jsonParameters: [
+					false,
+				],
 			},
 		},
 		default: '',
 		description: 'The name of the company to create.',
 	},
 	{
-		displayName: 'Simple',
-		name: 'simple',
-		type: 'boolean',
+		displayName: 'Body',
+		name: 'bodyJson',
+		type: 'json',
 		displayOptions: {
 			show: {
 				resource: [
@@ -80,10 +100,13 @@ export const companyFields = [
 				operation: [
 					'create',
 				],
+				jsonParameters: [
+					true,
+				],
 			},
 		},
-		default: true,
-		description: 'When set to true a simplify version of the response will be used else the raw data.',
+		default: '',
+		description: 'Company parameters',
 	},
 	{
 		displayName: 'Additional Fields',
@@ -99,6 +122,9 @@ export const companyFields = [
 				operation: [
 					'create',
 				],
+				jsonParameters: [
+					false,
+				],
 			},
 		},
 		options: [
@@ -107,6 +133,13 @@ export const companyFields = [
 				name: 'isPublished',
 				type: 'boolean',
 				default: false,
+			},
+			{
+				displayName: 'Company Email',
+				name: 'companyemail',
+				type: 'string',
+				default: '',
+				description: 'Email address of the company.',
 			},
 			{
 				displayName: 'Overwrite With Blank',
@@ -139,21 +172,41 @@ export const companyFields = [
 		description: 'The ID of the company to update.',
 	},
 	{
-		displayName: 'Simple',
-		name: 'simple',
+		displayName: 'JSON Parameters',
+		name: 'jsonParameters',
 		type: 'boolean',
+		default: false,
+		description: '',
 		displayOptions: {
 			show: {
-				resource: [
-					'company',
-				],
 				operation: [
 					'update',
 				],
+				resource: [
+					'company',
+				],
 			},
 		},
-		default: true,
-		description: 'When set to true a simplify version of the response will be used else the raw data.',
+	},
+	{
+		displayName: 'Body',
+		name: 'bodyJson',
+		type: 'json',
+		displayOptions: {
+			show: {
+				operation: [
+					'update',
+				],
+				resource: [
+					'company',
+				],
+				jsonParameters: [
+					true,
+				],
+			},
+		},
+		default: '',
+		description: 'Company parameters',
 	},
 	{
 		displayName: 'Update Fields',
@@ -169,15 +222,25 @@ export const companyFields = [
 				operation: [
 					'update',
 				],
+				jsonParameters: [
+					false,
+				],
 			},
 		},
 		options: [
 			{
 				displayName: 'Company Name',
-				name: 'name',
+				name: 'companyname',
 				type: 'string',
 				default: '',
 				description: 'Company name',
+			},
+			{
+				displayName: 'Company Email',
+				name: 'companyemail',
+				type: 'string',
+				default: '',
+				description: 'Email address of the company.',
 			},
 			{
 				displayName: 'Is Published',
@@ -214,23 +277,6 @@ export const companyFields = [
 		},
 		default: '',
 		description: 'The ID of the company to return.',
-	},
-	{
-		displayName: 'Simple',
-		name: 'simple',
-		type: 'boolean',
-		displayOptions: {
-			show: {
-				resource: [
-					'company',
-				],
-				operation: [
-					'get',
-				],
-			},
-		},
-		default: true,
-		description: 'When set to true a simplify version of the response will be used else the raw data.',
 	},
 
 	/* -------------------------------------------------------------------------- */
@@ -276,23 +322,6 @@ export const companyFields = [
 		},
 		default: 30,
 		description: 'How many results to return.',
-	},
-	{
-		displayName: 'Simple',
-		name: 'simple',
-		type: 'boolean',
-		displayOptions: {
-			show: {
-				resource: [
-					'company',
-				],
-				operation: [
-					'getAll',
-				],
-			},
-		},
-		default: true,
-		description: 'When set to true a simplify version of the response will be used else the raw data.',
 	},
 	{
 		displayName: 'Additional Fields',
@@ -367,21 +396,127 @@ export const companyFields = [
 		default: '',
 		description: 'The ID of the company to delete.',
 	},
+
+	/* -------------------------------------------------------------------------- */
+	/*                                 company:all                                */
+	/* -------------------------------------------------------------------------- */
 	{
-		displayName: 'Simple',
-		name: 'simple',
-		type: 'boolean',
+		displayName: 'Options',
+		name: 'options',
+		type: 'collection',
 		displayOptions: {
 			show: {
-				resource: [
+				'resource': [
 					'company',
-				],
-				operation: [
-					'delete',
 				],
 			},
 		},
-		default: true,
-		description: 'When set to true a simplify version of the response will be used else the raw data.',
+		placeholder: 'Add Option',
+		default: {},
+		options: [
+			{
+				displayName: 'Search',
+				name: 'search',
+				type: 'string',
+				displayOptions: {
+					show: {
+						'/resource': [
+							'company',
+						],
+						'/operation': [
+							'getAll',
+						],
+					},
+				},
+				default: '',
+				description: 'String or search command to filter entities by.',
+			},
+			{
+				displayName: 'Order By',
+				name: 'orderBy',
+				type: 'string',
+				displayOptions: {
+					show: {
+						'/resource': [
+							'company',
+						],
+						'/operation': [
+							'getAll',
+						],
+					},
+				},
+				default: '',
+				description: 'Column to sort by. Can use any column listed in the response.',
+			},
+			{
+				displayName: 'Order By Dir',
+				name: 'orderByDir',
+				type: 'options',
+				displayOptions: {
+					show: {
+						'/resource': [
+							'company',
+						],
+						'/operation': [
+							'getAll',
+						],
+					},
+				},
+				default: '',
+				options: [
+					{
+						name: 'ASC',
+						value: 'asc',
+					},
+					{
+						name: 'DESC',
+						value: 'desc',
+					},
+				],
+				description: 'Sort direction: ASC or DESC.',
+			},
+			{
+				displayName: 'Published Only',
+				name: 'publishedOnly',
+				type: 'boolean',
+				displayOptions: {
+					show: {
+						'/resource': [
+							'company',
+						],
+						'/operation': [
+							'getAll',
+						],
+					},
+				},
+				default: false,
+				description: 'Only return currently published entities.',
+			},
+			{
+				displayName: 'Minimal',
+				name: 'minimal',
+				type: 'boolean',
+				displayOptions: {
+					show: {
+						'/resource': [
+							'company',
+						],
+						'/operation': [
+							'getAll',
+						],
+					},
+				},
+				default: false,
+				description: 'Return only array of entities without additional lists in it.',
+			},
+			{
+				displayName: 'RAW Data',
+				name: 'rawData',
+				type: 'boolean',
+				default: true,
+				description: `By default only the data of the fields get returned. If this<br />
+							  options gets set the RAW response with all data gets returned.`,
+			},
+		],
 	},
 ] as INodeProperties[];
