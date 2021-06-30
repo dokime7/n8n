@@ -437,8 +437,8 @@ export const companyFields = [
 			},
 			{
 				displayName: 'Search',
-				name: 'isPublished',
-				type: 'boolean',
+				name: 'search',
+				type: 'string',
 				default: '',
 				description: 'String or search command to filter entities by.',
 			},
@@ -482,118 +482,4 @@ export const companyFields = [
 		description: 'When set to true a simplify version of the response will be used else the raw data.',
 	},
 
-	/* -------------------------------------------------------------------------- */
-	/*                                 company:all                                */
-	/* -------------------------------------------------------------------------- */
-	{
-		displayName: 'Options',
-		name: 'options',
-		type: 'collection',
-		displayOptions: {
-			show: {
-				'resource': [
-					'company',
-				],
-			},
-		},
-		placeholder: 'Add Option',
-		default: {},
-		options: [
-			{
-				displayName: 'Search',
-				name: 'search',
-				type: 'string',
-				displayOptions: {
-					show: {
-						'/resource': [
-							'company',
-						],
-						'/operation': [
-							'getAll',
-						],
-					},
-				},
-				default: '',
-				description: 'String or search command to filter entities by.',
-			},
-			{
-				displayName: 'Order By',
-				name: 'orderBy',
-				type: 'string',
-				displayOptions: {
-					show: {
-						'/resource': [
-							'company',
-						],
-						'/operation': [
-							'getAll',
-						],
-					},
-				},
-				default: '',
-				description: 'Column to sort by. Can use any column listed in the response.',
-			},
-			{
-				displayName: 'Order By Dir',
-				name: 'orderByDir',
-				type: 'options',
-				displayOptions: {
-					show: {
-						'/resource': [
-							'company',
-						],
-						'/operation': [
-							'getAll',
-						],
-					},
-				},
-				default: '',
-				options: [
-					{
-						name: 'ASC',
-						value: 'asc',
-					},
-					{
-						name: 'DESC',
-						value: 'desc',
-					},
-				],
-				description: 'Sort direction: ASC or DESC.',
-			},
-			{
-				displayName: 'Published Only',
-				name: 'publishedOnly',
-				type: 'boolean',
-				displayOptions: {
-					show: {
-						'/resource': [
-							'company',
-						],
-						'/operation': [
-							'getAll',
-						],
-					},
-				},
-				default: false,
-				description: 'Only return currently published entities.',
-			},
-			{
-				displayName: 'Minimal',
-				name: 'minimal',
-				type: 'boolean',
-				displayOptions: {
-					show: {
-						'/resource': [
-							'company',
-						],
-						'/operation': [
-							'getAll',
-						],
-					},
-				},
-				default: false,
-				description: 'Return only array of entities without additional lists in it.',
-			},
-		],
-	},
 ] as INodeProperties[];
