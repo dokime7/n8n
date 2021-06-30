@@ -70,7 +70,7 @@ export const companyFields = [
 	},
 	{
 		displayName: 'Company Name',
-		name: 'companyname',
+		name: 'name',
 		type: 'string',
 		displayOptions: {
 			show: {
@@ -109,6 +109,23 @@ export const companyFields = [
 		description: 'Company parameters',
 	},
 	{
+		displayName: 'Simple',
+		name: 'simple',
+		type: 'boolean',
+		displayOptions: {
+			show: {
+				resource: [
+					'company',
+				],
+				operation: [
+					'create',
+				],
+			},
+		},
+		default: true,
+		description: 'When set to true a simplify version of the response will be used else the raw data.',
+	},
+	{
 		displayName: 'Additional Fields',
 		name: 'additionalFields',
 		type: 'collection',
@@ -129,17 +146,17 @@ export const companyFields = [
 		},
 		options: [
 			{
-				displayName: 'Is Published',
-				name: 'isPublished',
-				type: 'boolean',
-				default: false,
-			},
-			{
 				displayName: 'Company Email',
 				name: 'companyemail',
 				type: 'string',
 				default: '',
 				description: 'Email address of the company.',
+			},
+			{
+				displayName: 'Is Published',
+				name: 'isPublished',
+				type: 'boolean',
+				default: false,
 			},
 			{
 				displayName: 'Overwrite With Blank',
@@ -209,6 +226,23 @@ export const companyFields = [
 		description: 'Company parameters',
 	},
 	{
+		displayName: 'Simple',
+		name: 'simple',
+		type: 'boolean',
+		displayOptions: {
+			show: {
+				resource: [
+					'company',
+				],
+				operation: [
+					'update',
+				],
+			},
+		},
+		default: true,
+		description: 'When set to true a simplify version of the response will be used else the raw data.',
+	},
+	{
 		displayName: 'Update Fields',
 		name: 'updateFields',
 		type: 'collection',
@@ -230,7 +264,7 @@ export const companyFields = [
 		options: [
 			{
 				displayName: 'Company Name',
-				name: 'companyname',
+				name: 'name',
 				type: 'string',
 				default: '',
 				description: 'Company name',
@@ -278,6 +312,23 @@ export const companyFields = [
 		default: '',
 		description: 'The ID of the company to return.',
 	},
+	{
+		displayName: 'Simple',
+		name: 'simple',
+		type: 'boolean',
+		displayOptions: {
+			show: {
+				resource: [
+					'company',
+				],
+				operation: [
+					'get',
+				],
+			},
+		},
+		default: true,
+		description: 'When set to true a simplify version of the response will be used else the raw data.',
+	},
 
 	/* -------------------------------------------------------------------------- */
 	/*                                company:getAll                              */
@@ -322,6 +373,23 @@ export const companyFields = [
 		},
 		default: 30,
 		description: 'How many results to return.',
+	},
+	{
+		displayName: 'Simple',
+		name: 'simple',
+		type: 'boolean',
+		displayOptions: {
+			show: {
+				resource: [
+					'company',
+				],
+				operation: [
+					'getAll',
+				],
+			},
+		},
+		default: true,
+		description: 'When set to true a simplify version of the response will be used else the raw data.',
 	},
 	{
 		displayName: 'Additional Fields',
@@ -395,6 +463,23 @@ export const companyFields = [
 		},
 		default: '',
 		description: 'The ID of the company to delete.',
+	},
+	{
+		displayName: 'Simple',
+		name: 'simple',
+		type: 'boolean',
+		displayOptions: {
+			show: {
+				resource: [
+					'company',
+				],
+				operation: [
+					'delete',
+				],
+			},
+		},
+		default: true,
+		description: 'When set to true a simplify version of the response will be used else the raw data.',
 	},
 
 	/* -------------------------------------------------------------------------- */
@@ -508,14 +593,6 @@ export const companyFields = [
 				},
 				default: false,
 				description: 'Return only array of entities without additional lists in it.',
-			},
-			{
-				displayName: 'RAW Data',
-				name: 'rawData',
-				type: 'boolean',
-				default: true,
-				description: `By default only the data of the fields get returned. If this<br />
-							  options gets set the RAW response with all data gets returned.`,
 			},
 		],
 	},
